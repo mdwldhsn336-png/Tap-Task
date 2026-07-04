@@ -5,32 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TAP TASK PRO</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/otpauth/dist/otpauth.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <style>
-        :root { --primary: #4f46e5; --primary-gradient: linear-gradient(135deg, #4f46e5, #9333ea); --bg: #0f172a; --card: #1e293b; --text: #f8fafc; --muted: #94a3b8; --border: #334155; --success: #10b981; --warning: #f59e0b; --danger: #ef4444; --blue: #3b82f6; --info: #0ea5e9; }
-        .light-mode { --bg: #f8fafc; --card: #ffffff; --text: #0f172a; --muted: #64748b; --border: #e2e8f0; }
+        :root { 
+            /* Premium Theme Colors */
+            --primary: #6366f1; 
+            --primary-gradient: linear-gradient(135deg, #6366f1, #0ea5e9); 
+            --bg: #090e17; /* Deep professional dark */
+            --card: #131c2d; /* Sleek card background */
+            --text: #f8fafc; 
+            --muted: #94a3b8; 
+            --border: #1e293b; 
+            --success: #10b981; 
+            --warning: #f59e0b; 
+            --danger: #ef4444; 
+            --blue: #3b82f6; 
+            --info: #0ea5e9; 
+        }
+        .light-mode { 
+            --bg: #f8fafc; 
+            --card: #ffffff; 
+            --text: #0f172a; 
+            --muted: #64748b; 
+            --border: #e2e8f0; 
+            --primary-gradient: linear-gradient(135deg, #4f46e5, #06b6d4); 
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Outfit', sans-serif; -webkit-tap-highlight-color: transparent; }
         body { background: var(--bg); color: var(--text); overflow: hidden; transition: background 0.4s ease; }
         .page { display: none; height: 100dvh; width: 100%; position: absolute; overflow-y: auto; padding-bottom: 120px; -webkit-overflow-scrolling: touch; }
-        .page.active { display: block; animation: fadeSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+        .page.active { display: block; animation: fadeSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
         @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .container { padding: 15px; }
-        .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 50; border-bottom: 1px solid var(--border); }
-        .light-mode .header { background: rgba(255, 255, 255, 0.8); }
-        .header h2 { font-size: 1.5rem; font-weight: 800; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Smooth Transitions for UI Elements */
+        .section-box, .stat-card, .data-box, .btn-main { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .section-box:hover, .stat-card:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,0,0,0.2); }
 
-        /* Splash Screen */
-        #splash-screen { position: fixed; inset: 0; z-index: 9999; background: var(--primary-gradient); display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; transition: opacity 0.5s; background-size: 200% 200%; animation: gradShift 3s ease infinite; }
-        .splash-logo-box { position: relative; display: flex; justify-content: center; align-items: center; width: 150px; height: 150px; margin-bottom: 20px; }
-        .splash-ring { position: absolute; inset: 0; border: 4px solid transparent; border-top-color: white; border-bottom-color: white; border-radius: 50%; animation: spin 1.5s linear infinite; }
-        .splash-ring-inner { position: absolute; inset: 15px; border: 4px solid transparent; border-left-color: rgba(255,255,255,0.6); border-right-color: rgba(255,255,255,0.6); border-radius: 50%; animation: spinReverse 2s linear infinite; }
-        .splash-logo { font-size: 2.8rem; font-weight: 800; animation: pulseLogo 1.5s infinite; text-shadow: 0 10px 30px rgba(0,0,0,0.3); z-index: 10; }
-        @keyframes pulseLogo { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
-        @keyframes gradShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        .container { padding: 15px; }
+        
+        /* Glassmorphism Header & Nav */
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: rgba(19, 28, 45, 0.75); backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 50; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .light-mode .header { background: rgba(255, 255, 255, 0.85); border-bottom: 1px solid var(--border); }
+        .header h2 { font-size: 1.5rem; font-weight: 800; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; }
+
+        /* Premium Splash Screen */
+        #splash-screen { position: fixed; inset: 0; z-index: 9999; background: var(--bg); display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; transition: opacity 0.6s ease; }
+        .splash-logo-box { position: relative; display: flex; justify-content: center; align-items: center; width: 160px; height: 160px; margin-bottom: 25px; }
+        .splash-ring { position: absolute; inset: 0; border: 3px solid transparent; border-top-color: var(--primary); border-bottom-color: var(--info); border-radius: 50%; animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite; box-shadow: 0 0 20px rgba(99, 102, 241, 0.2); }
+        .splash-ring-inner { position: absolute; inset: 15px; border: 3px solid transparent; border-left-color: var(--info); border-right-color: var(--primary); border-radius: 50%; animation: spinReverse 2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite; }
+        .splash-logo { font-size: 3rem; font-weight: 900; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: pulseLogo 2s ease-in-out infinite; text-shadow: 0 10px 30px rgba(99, 102, 241, 0.2); z-index: 10; letter-spacing: -1px; }
+        
+        @keyframes pulseLogo { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.05); opacity: 0.8; } }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes spinReverse { 0% { transform: rotate(360deg); } 100% { transform: rotate(0deg); } }
+
+        /* Submit Animation Overlay */
+        #submit-success-overlay { position: fixed; inset: 0; z-index: 100000; background: rgba(9, 14, 23, 0.85); backdrop-filter: blur(8px); display: none; flex-direction: column; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.3s ease; }
+        #submit-success-overlay.show { opacity: 1; }
+        .success-checkmark { width: 90px; height: 90px; background: var(--primary-gradient); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-size: 2.8rem; box-shadow: 0 10px 40px rgba(16, 185, 129, 0.4); transform: scale(0); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        #submit-success-overlay.show .success-checkmark { transform: scale(1); }
+        .success-text { color: white; margin-top: 25px; font-weight: 800; font-size: 1.6rem; text-shadow: 0 4px 15px rgba(0,0,0,0.5); transform: translateY(20px); opacity: 0; transition: all 0.4s ease 0.1s; letter-spacing: 0.5px; }
+        #submit-success-overlay.show .success-text { transform: translateY(0); opacity: 1; }
 
         /* Auth UI */
         #login-page { justify-content: center; align-items: center; background: url('https://source.unsplash.com/random/1080x1920/?abstract,dark') center/cover; display: none; flex-direction: column; }
@@ -45,42 +81,47 @@
         .auth-switch-text { text-align: center; color: var(--muted); font-size: 0.95rem; margin-top: 10px; }
         .auth-switch-text span { color: var(--primary); font-weight: 700; cursor: pointer; }
 
-        #toast-container { position: fixed; top: 20px; right: 20px; left: 20px; z-index: 10000; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
-        .toast { background: var(--card); color: var(--text); padding: 15px 20px; border-radius: 12px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-left: 5px solid var(--primary); animation: slideInToast 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; font-weight: 600; font-size: 0.95rem; }
+        #toast-container { position: fixed; top: 20px; right: 20px; left: 20px; z-index: 100000; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
+        .toast { background: var(--card); color: var(--text); padding: 15px 20px; border-radius: 12px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border-left: 5px solid var(--primary); animation: slideInToast 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; font-weight: 600; font-size: 0.95rem; border: 1px solid rgba(255,255,255,0.05); }
         .toast.success { border-left-color: var(--success); } .toast.error { border-left-color: var(--danger); }
         @keyframes slideInToast { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-        .welcome-card { background: var(--primary-gradient); padding: 22px; border-radius: 18px; color: white; margin-bottom: 15px; box-shadow: 0 10px 25px rgba(79, 70, 229, 0.3); background-size: 200% 200%; animation: gradShift 5s ease infinite; }
+        .welcome-card { background: var(--primary-gradient); padding: 22px; border-radius: 18px; color: white; margin-bottom: 15px; box-shadow: 0 10px 30px rgba(99, 102, 241, 0.25); position: relative; overflow: hidden; }
+        .welcome-card::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); animation: shine 4s infinite; }
+        @keyframes shine { 0% { left: -100%; } 20% { left: 200%; } 100% { left: 200%; } }
+
         .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 15px; }
-        .stat-card { background: var(--card); padding: 16px; border-radius: 16px; text-align: center; border: 1px solid var(--border); box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s; }
+        .stat-card { background: var(--card); padding: 16px; border-radius: 16px; text-align: center; border: 1px solid var(--border); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         .stat-card h4 { font-size: 1.5rem; margin-top: 5px; color: var(--text); font-weight: 800; }
-        .section-box { background: var(--card); border-radius: 16px; padding: 16px; border: 1px solid var(--border); margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .section-box { background: var(--card); border-radius: 16px; padding: 16px; border: 1px solid var(--border); margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         
-        .input-box { width: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 14px 16px; border-radius: 12px; outline: none; font-size: 1.05rem; font-weight: 500; transition: border-color 0.3s; }
-        .input-box:focus { border-color: var(--primary); }
+        .input-box { width: 100%; background: var(--bg); border: 1px solid var(--border); color: var(--text); padding: 14px 16px; border-radius: 12px; outline: none; font-size: 1.05rem; font-weight: 500; transition: border-color 0.3s, box-shadow 0.3s; }
+        .input-box:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15); }
         select.input-box { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%2394a3b8%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E"); background-repeat: no-repeat; background-position: right 1rem top 50%; background-size: 0.65rem auto; }
-        .btn-main { background: var(--primary-gradient); color: white; border: none; width: 100%; padding: 15px; border-radius: 12px; font-weight: 700; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: center; align-items:center; gap: 8px; transition: transform 0.2s, opacity 0.2s; box-shadow: 0 5px 15px rgba(79, 70, 229, 0.3); }
-        .btn-main:active { transform: scale(0.97); } .btn-main:disabled { opacity: 0.7; cursor: not-allowed; }
-        .data-box { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 15px 20px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: 0.3s; }
+        .btn-main { background: var(--primary-gradient); color: white; border: none; width: 100%; padding: 15px; border-radius: 12px; font-weight: 700; font-size: 1.1rem; cursor: pointer; display: flex; justify-content: center; align-items:center; gap: 8px; box-shadow: 0 8px 20px rgba(99, 102, 241, 0.25); }
+        .btn-main:active { transform: scale(0.96); } .btn-main:disabled { opacity: 0.7; cursor: not-allowed; }
+        .data-box { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 15px 20px; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
         .data-box.copied { background: transparent !important; border-color: var(--success) !important; box-shadow: 0 0 15px rgba(16, 185, 129, 0.5), inset 0 0 10px rgba(16, 185, 129, 0.2) !important; }
         .data-box.copied * { color: var(--success) !important; }
-        .pay-card { transition: 0.3s; border: 2px solid var(--border); background: var(--bg); border-radius: 16px; }
-        .pay-card.selected { border-color: var(--primary) !important; background: transparent !important; box-shadow: 0 0 20px rgba(79, 70, 229, 0.6), inset 0 0 10px rgba(79, 70, 229, 0.2) !important; }
+        .pay-card { border: 2px solid var(--border); background: var(--bg); border-radius: 16px; }
+        .pay-card.selected { border-color: var(--primary) !important; background: transparent !important; box-shadow: 0 0 20px rgba(99, 102, 241, 0.4), inset 0 0 10px rgba(99, 102, 241, 0.1) !important; }
         .support-options { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; display: flex; flex-direction: column; gap: 10px; }
         .support-options.open { max-height: 250px; margin-top: 15px; }
         .input-with-icon { position: relative; width: 100%; margin-bottom: 12px; }
         .input-with-icon .input-box { width: 100%; padding-right: 55px; margin-bottom: 0; }
-        .paste-icon-btn { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: var(--primary-gradient); color: white; border: none; width: 40px; height: 40px; border-radius: 8px; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3); transition: all 0.2s ease; }
+        .paste-icon-btn { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); background: var(--primary-gradient); color: white; border: none; width: 40px; height: 40px; border-radius: 8px; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3); transition: all 0.2s ease; }
         .paste-icon-btn:active { transform: translateY(-50%) scale(0.9); box-shadow: inset 0 2px 5px rgba(0,0,0,0.2); }
         .paste-icon-btn-textarea { top: 6px; transform: none; } .paste-icon-btn-textarea:active { transform: scale(0.9); }
-        .bottom-nav { position: fixed; bottom: 0; width: 100%; height: 70px; background: rgba(30, 41, 59, 0.95); backdrop-filter: blur(10px); display: flex; justify-content: space-around; align-items: center; border-top: 1px solid var(--border); z-index: 100; box-shadow: 0 -5px 20px rgba(0,0,0,0.2); }
-        .light-mode .bottom-nav { background: rgba(255, 255, 255, 0.95); }
+        
+        .bottom-nav { position: fixed; bottom: 0; width: 100%; height: 70px; background: rgba(19, 28, 45, 0.85); backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); z-index: 100; box-shadow: 0 -5px 25px rgba(0,0,0,0.3); }
+        .light-mode .bottom-nav { background: rgba(255, 255, 255, 0.95); border-top: 1px solid var(--border); }
         .nav-item { color: var(--muted); display: flex; flex-direction: column; align-items: center; font-size: 0.8rem; text-decoration: none; width: 55px; font-weight: 600; transition: 0.3s; }
         .nav-item i { font-size: 1.3rem; margin-bottom: 4px; transition: 0.3s; }
-        .nav-item.active { color: var(--primary); text-shadow: 0 0 15px rgba(79, 70, 229, 0.5); }
+        .nav-item.active { color: var(--primary); text-shadow: 0 0 15px rgba(99, 102, 241, 0.5); }
         .nav-item.active i { transform: translateY(-4px); }
-        .task-hex { width: 62px; height: 62px; background: var(--primary-gradient); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-size: 1.5rem; position: relative; top: -20px; border: 5px solid var(--bg); box-shadow: 0 10px 25px rgba(79, 70, 229, 0.5); transition: 0.3s; }
+        .task-hex { width: 62px; height: 62px; background: var(--primary-gradient); border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; font-size: 1.5rem; position: relative; top: -20px; border: 5px solid var(--bg); box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4); transition: 0.3s; }
         .task-hex:active { transform: scale(0.9); }
+        
         .leaderboard-list { background: var(--card); border-radius: 16px; padding: 10px; border: 1px solid var(--border); }
         .lb-item { display: flex; align-items: center; justify-content: space-between; padding: 15px; border-bottom: 1px solid var(--border); transition: 0.3s; }
         .lb-item:last-child { border-bottom: none; }
@@ -88,7 +129,7 @@
         .lb-user { flex: 1; display: flex; align-items: center; gap: 12px; font-weight: 600; font-size: 1.05rem; }
         .lb-user img { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--primary); }
         .lb-score { background: var(--bg); padding: 6px 14px; border-radius: 20px; font-size: 0.9rem; color: var(--primary); font-weight: 800; }
-        .lb-item.me { background: rgba(79, 70, 229, 0.1); border: 1px solid var(--primary); border-radius: 12px; }
+        .lb-item.me { background: rgba(99, 102, 241, 0.1); border: 1px solid var(--primary); border-radius: 12px; }
         .custom-modal { position: fixed; inset: 0; background: var(--bg); z-index: 1000; display: none; overflow-y: auto; padding-bottom: 80px; -webkit-overflow-scrolling: touch; }
         .custom-modal.active { display: block; animation: fadeSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
         .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
@@ -104,7 +145,7 @@
         .slider:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: white; border-radius: 50%; transition: .4s; }
         input:checked + .slider { background-color: var(--success); }
         input:checked + .slider:before { transform: translateX(20px); }
-        .pro-avatar { width: 100px; height: 100px; border-radius: 50%; background: var(--primary-gradient); display: flex; justify-content: center; align-items: center; color: white; font-size: 3rem; font-weight: 800; margin: 0 auto 15px; box-shadow: 0 10px 25px rgba(79, 70, 229, 0.4); border: 4px solid var(--bg); }
+        .pro-avatar { width: 100px; height: 100px; border-radius: 50%; background: var(--primary-gradient); display: flex; justify-content: center; align-items: center; color: white; font-size: 3rem; font-weight: 800; margin: 0 auto 15px; box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3); border: 4px solid var(--bg); }
         .task-list-item { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 15px; margin-bottom: 12px; display:flex; justify-content: space-between; align-items: center; }
         .live-table-wrapper { width: 100%; overflow-x: auto; background: var(--card); border-radius: 12px; border: 1px solid var(--border); margin-bottom: 20px; }
         .live-table { width: 100%; border-collapse: collapse; min-width: 600px; }
@@ -114,13 +155,21 @@
 </head>
 <body>
 
+    <!-- Submit Success Overlay -->
+    <div id="submit-success-overlay">
+        <div class="success-checkmark"><i class="fas fa-check"></i></div>
+        <h2 class="success-text">Task Submitted!</h2>
+    </div>
+
+    <!-- Splash Screen -->
     <div id="splash-screen">
         <div class="splash-logo-box">
             <div class="splash-ring"></div>
             <div class="splash-ring-inner"></div>
-            <div class="splash-logo">TAP TASK PRO</div>
+            <div class="splash-logo">TTP</div>
         </div>
-        <p style="font-weight:600; letter-spacing:2px; opacity:0.8;">YOUR SMART CAREER</p>
+        <p style="font-weight:800; letter-spacing:3px; font-size:1.1rem; opacity:0.9; text-transform:uppercase;">TAP TASK PRO</p>
+        <p style="font-weight:500; font-size:0.85rem; color:var(--muted); margin-top:5px;">YOUR SMART CAREER</p>
     </div>
     
     <div id="toast-container"></div>
@@ -158,20 +207,20 @@
             <div class="container">
                 <div class="welcome-card"><h3>স্বাগতম, <span id="u-name">User</span>!</h3><p style="font-size: 0.95rem; opacity: 0.9; margin-top:5px;">আপনার রিয়েলটাইম স্ট্যাটাস</p></div>
                 <div class="stats-grid"><div class="stat-card"><i class="fas fa-check-circle" style="color:var(--success); font-size:1.8rem;"></i><h4 id="stat-app">0</h4><p style="font-size:0.85rem; color:var(--muted); font-weight:600;">Approved</p></div><div class="stat-card"><i class="fas fa-wallet" style="color:var(--warning); font-size:1.8rem;"></i><h4 id="stat-earn">৳ 0.00</h4><p style="font-size:0.85rem; color:var(--muted); font-weight:600;">Earned</p></div><div class="stat-card"><i class="fas fa-clock" style="color:var(--danger); font-size:1.8rem;"></i><h4 id="stat-pend">0</h4><p style="font-size:0.85rem; color:var(--muted); font-weight:600;">Pending Task</p></div><div class="stat-card"><i class="fas fa-spinner" style="color:var(--info); font-size:1.8rem;"></i><h4 id="stat-proc" style="color:var(--info);">0</h4><p style="font-size:0.85rem; color:var(--muted); font-weight:600;">In Processing</p></div></div>
-                <div class="section-box" style="display:flex; justify-content:space-between; align-items:center; border-color:var(--primary); background:rgba(79, 70, 229, 0.05);"><div style="font-weight:700; color:var(--text);"><i class="fas fa-money-check-alt" style="color:var(--primary); margin-right:5px;"></i> Withdraw Status</div><div id="stat-with" style="color:var(--primary); font-weight:800; font-size:1.1rem;">None</div></div>
+                <div class="section-box" style="display:flex; justify-content:space-between; align-items:center; border-color:var(--primary); background:rgba(99, 102, 241, 0.05);"><div style="font-weight:700; color:var(--text);"><i class="fas fa-money-check-alt" style="color:var(--primary); margin-right:5px;"></i> Withdraw Status</div><div id="stat-with" style="color:var(--primary); font-weight:800; font-size:1.1rem;">None</div></div>
                 <div class="section-box"><div style="font-weight:800; margin-bottom:10px; color:var(--warning); font-size:1.1rem;"><i class="fas fa-bullhorn"></i> নোটিশবোর্ড</div><p id="user-notice" style="font-size:0.95rem; color:var(--muted); line-height:1.6; font-weight:500;">Loading...</p></div>
                 <div class="section-box"><button class="btn-main" style="background:var(--bg); border:1px solid var(--border); color:var(--text); text-align:left; justify-content:space-between; box-shadow:none;" onclick="document.getElementById('support-menu').classList.toggle('open')"><span><i class="fas fa-headset" style="color:#06b6d4;"></i> Support Center</span> <i class="fas fa-chevron-down"></i></button><div id="support-menu" class="support-options"><a href="#" id="tg-link" style="background:#0088cc; color:white; padding:14px; border-radius:12px; text-decoration:none; display:flex; justify-content:center; gap:8px; font-weight:700;" target="_blank"><i class="fab fa-telegram"></i> Telegram Channel</a><a href="#" id="wa-link" style="background:#25D366; color:white; padding:14px; border-radius:12px; text-decoration:none; display:flex; justify-content:center; gap:8px; font-weight:700;" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Admin</a><a href="#" id="ac-link" style="background:var(--danger); color:white; padding:14px; border-radius:12px; text-decoration:none; display:flex; justify-content:center; gap:8px; font-weight:700;" target="_blank"><i class="fas fa-user-shield"></i> Admin Contact</a></div></div>
-                <div class="section-box" style="cursor:pointer; border-color:var(--primary); background:rgba(79, 70, 229, 0.05);" onclick="openSubPage('referral-page')"><div style="display:flex; justify-content:space-between; align-items:center;"><div><h4 style="color:var(--primary); font-weight:800; font-size:1.1rem;"><i class="fas fa-user-plus"></i> Invite Your Friends</h4><p style="font-size:0.85rem; color:var(--muted); font-weight:600; margin-top:3px;">Earn extra commission by referring!</p></div><i class="fas fa-chevron-right" style="color:var(--primary);"></i></div></div>
+                <div class="section-box" style="cursor:pointer; border-color:var(--primary); background:rgba(99, 102, 241, 0.05);" onclick="openSubPage('referral-page')"><div style="display:flex; justify-content:space-between; align-items:center;"><div><h4 style="color:var(--primary); font-weight:800; font-size:1.1rem;"><i class="fas fa-user-plus"></i> Invite Your Friends</h4><p style="font-size:0.85rem; color:var(--muted); font-weight:600; margin-top:3px;">Earn extra commission by referring!</p></div><i class="fas fa-chevron-right" style="color:var(--primary);"></i></div></div>
             </div>
         </div>
 
-        <div id="referral-page" class="custom-modal"><header class="header"><h2 onclick="closeSubPage()" style="cursor:pointer;"><i class="fas fa-arrow-left"></i> Invite Friends</h2></header><div class="container"><h3 style="text-align:center; margin-bottom:10px; font-weight:800;">Referral Program</h3><p style="text-align:center; color:var(--muted); margin-bottom:25px; font-weight:600;">Earn <span id="ref-percent-display" style="color:var(--primary); font-weight:800;">10</span>% commission on your friends' approved tasks!</p><div style="display:flex; justify-content:space-around; gap:10px; margin-bottom:30px;"><div style="width:105px; height:105px; border-radius:50%; border:5px solid var(--primary); display:flex; flex-direction:column; justify-content:center; align-items:center; background:var(--card); box-shadow:0 5px 15px rgba(79,70,229,0.2);"><span style="font-size:1.3rem; font-weight:800; color:var(--text);" id="ref-total-earn">৳ 0</span><span style="font-size:0.75rem; color:var(--muted); font-weight:600;">Commission</span></div><div style="width:105px; height:105px; border-radius:50%; border:5px solid var(--success); display:flex; flex-direction:column; justify-content:center; align-items:center; background:var(--card); box-shadow:0 5px 15px rgba(16,185,129,0.2);"><span style="font-size:1.3rem; font-weight:800; color:var(--text);" id="ref-today-earn">৳ 0</span><span style="font-size:0.75rem; color:var(--muted); font-weight:600;">Today Earn</span></div><div style="width:105px; height:105px; border-radius:50%; border:5px solid var(--warning); display:flex; flex-direction:column; justify-content:center; align-items:center; background:var(--card); box-shadow:0 5px 15px rgba(245,158,11,0.2);"><span style="font-size:1.3rem; font-weight:800; color:var(--text);" id="ref-user-count">0</span><span style="font-size:0.75rem; color:var(--muted); font-weight:600;">Users</span></div></div><div class="section-box" style="text-align:center;"><i class="fas fa-gift" style="font-size:2.5rem; color:var(--primary); margin-bottom:15px;"></i><p style="font-size:0.95rem; font-weight:600; margin-bottom:15px;">Share this link with your friends to start earning.</p><div class="data-box" onclick="copyData(this, 'ref-link-text')" style="background:var(--bg); border:2px dashed var(--primary); padding:15px;"><div id="ref-link-text" style="font-size:0.85rem; word-break:break-all; font-weight:600; text-align:left; color:var(--text);">Loading link...</div><i class="fas fa-copy" style="color:var(--primary); font-size:1.2rem;"></i></div></div></div></div>
+        <div id="referral-page" class="custom-modal"><header class="header"><h2 onclick="closeSubPage()" style="cursor:pointer;"><i class="fas fa-arrow-left"></i> Invite Friends</h2></header><div class="container"><h3 style="text-align:center; margin-bottom:10px; font-weight:800;">Referral Program</h3><p style="text-align:center; color:var(--muted); margin-bottom:25px; font-weight:600;">Earn <span id="ref-percent-display" style="color:var(--primary); font-weight:800;">10</span>% commission on your friends' approved tasks!</p><div style="display:flex; justify-content:space-around; gap:10px; margin-bottom:30px;"><div style="width:105px; height:105px; border-radius:50%; border:5px solid var(--primary); display:flex; flex-direction:column; justify-content:center; align-items:center; background:var(--card); box-shadow:0 5px 15px rgba(99,102,241,0.2);"><span style="font-size:1.3rem; font-weight:800; color:var(--text);" id="ref-total-earn">৳ 0</span><span style="font-size:0.75rem; color:var(--muted); font-weight:600;">Commission</span></div><div style="width:105px; height:105px; border-radius:50%; border:5px solid var(--success); display:flex; flex-direction:column; justify-content:center; align-items:center; background:var(--card); box-shadow:0 5px 15px rgba(16,185,129,0.2);"><span style="font-size:1.3rem; font-weight:800; color:var(--text);" id="ref-today-earn">৳ 0</span><span style="font-size:0.75rem; color:var(--muted); font-weight:600;">Today Earn</span></div><div style="width:105px; height:105px; border-radius:50%; border:5px solid var(--warning); display:flex; flex-direction:column; justify-content:center; align-items:center; background:var(--card); box-shadow:0 5px 15px rgba(245,158,11,0.2);"><span style="font-size:1.3rem; font-weight:800; color:var(--text);" id="ref-user-count">0</span><span style="font-size:0.75rem; color:var(--muted); font-weight:600;">Users</span></div></div><div class="section-box" style="text-align:center;"><i class="fas fa-gift" style="font-size:2.5rem; color:var(--primary); margin-bottom:15px;"></i><p style="font-size:0.95rem; font-weight:600; margin-bottom:15px;">Share this link with your friends to start earning.</p><div class="data-box" onclick="copyData(this, 'ref-link-text')" style="background:var(--bg); border:2px dashed var(--primary); padding:15px;"><div id="ref-link-text" style="font-size:0.85rem; word-break:break-all; font-weight:600; text-align:left; color:var(--text);">Loading link...</div><i class="fas fa-copy" style="color:var(--primary); font-size:1.2rem;"></i></div></div></div></div>
         <div id="top-page" class="page"><div class="container"><h3 style="margin-bottom: 15px; font-size:1.4rem; font-weight:800;"><i class="fas fa-trophy" style="color:gold;"></i> আজকের লিডারবোর্ড</h3><div class="leaderboard-list" id="leaderboard-container"></div></div></div>
         <div id="task-page" class="page"><div class="container"><h3 style="margin-bottom: 15px; font-size:1.4rem; font-weight:800;">Available Tasks</h3><div id="task-list-container"><div style="text-align:center; padding:20px; color:var(--muted);"><i class="fas fa-spinner fa-spin"></i> Loading Tasks...</div></div></div></div>
 
         <div id="wallet-page" class="page">
             <div class="container">
-                <div style="width: 170px; height: 170px; border: 8px solid var(--primary); border-radius: 50%; margin: 10px auto 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 10px 30px rgba(79, 70, 229, 0.2);"><span style="color:var(--muted); font-size:0.9rem; font-weight:600;">Current Balance</span><h2 id="wallet-bal" style="font-size: 2.2rem; color:var(--primary); margin-top:5px; font-weight:800;">৳ 0.00</h2></div>
+                <div style="width: 170px; height: 170px; border: 8px solid var(--primary); border-radius: 50%; margin: 10px auto 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);"><span style="color:var(--muted); font-size:0.9rem; font-weight:600;">Current Balance</span><h2 id="wallet-bal" style="font-size: 2.2rem; color:var(--primary); margin-top:5px; font-weight:800;">৳ 0.00</h2></div>
                 <div class="section-box" style="background:rgba(245, 158, 11, 0.1); border-color:var(--warning);"><p style="font-size:0.9rem; color:var(--warning); font-weight:600; text-align:center;" id="w-rules">Loading rules...</p></div>
                 <div style="display: flex; gap: 15px; margin-bottom: 20px;"><div class="section-box pay-card selected" style="flex:1; text-align:center; padding:20px 10px; cursor:pointer;" onclick="selectWithdraw('bkash', this)"><i class="fas fa-mobile-alt" style="font-size:2.2rem; color:#e2136e; margin-bottom:10px;"></i><br><b style="font-size:1.1rem;">bKash</b></div><div class="section-box pay-card" style="flex:1; text-align:center; padding:20px 10px; cursor:pointer;" onclick="selectWithdraw('binance', this)"><i class="fab fa-bitcoin" style="font-size:2.2rem; color:#f3ba2f; margin-bottom:10px;"></i><br><b style="font-size:1.1rem;">Binance</b></div></div>
                 <input type="text" id="w-account" class="input-box" placeholder="বিকাশ নম্বর দিন">
@@ -197,7 +246,7 @@
     <div id="task-modal" class="custom-modal">
         <header class="header"><h3 id="modal-task-name" style="font-weight:800;"><i class="fas fa-tasks"></i> Task</h3><button onclick="closeSubPage()" style="background:none; border:none; color:var(--danger); font-size:1.8rem; cursor:pointer;"><i class="fas fa-times-circle"></i></button></header>
         <div class="container">
-            <div style="display:inline-block; background:var(--primary-gradient); color:white; padding:8px 18px; border-radius:20px; font-size:1rem; font-weight:800; margin-bottom:15px; box-shadow:0 5px 15px rgba(79,70,229,0.3);" id="current-task-id">WP-00000</div>
+            <div style="display:inline-block; background:var(--primary-gradient); color:white; padding:8px 18px; border-radius:20px; font-size:1rem; font-weight:800; margin-bottom:15px; box-shadow:0 5px 15px rgba(99,102,241,0.3);" id="current-task-id">WP-00000</div>
             
             <div class="data-box" id="first-name-box" onclick="copyData(this, 'task-firstname')" style="display:none;"><div style="display:flex; flex-direction:column; gap:4px; align-items:center; width:100%;"><span style="font-size:0.7rem; color:var(--muted); font-weight:800; letter-spacing:1px; opacity:0.6;">FIRST NAME</span><span id="task-firstname" style="font-weight:800; font-size:1.2rem; color:var(--text);">Generating...</span></div></div>
             <div class="data-box" id="last-name-box" onclick="copyData(this, 'task-lastname')" style="display:none;"><div style="display:flex; flex-direction:column; gap:4px; align-items:center; width:100%;"><span style="font-size:0.7rem; color:var(--muted); font-weight:800; letter-spacing:1px; opacity:0.6;">LAST NAME</span><span id="task-lastname" style="font-weight:800; font-size:1.2rem; color:var(--text);">Generating...</span></div></div>
@@ -212,7 +261,7 @@
                 <div style="font-size:0.9rem; font-weight:800; margin-bottom:12px; color:var(--warning);">2FA SECRET CODE</div>
                 <div class="input-with-icon"><input type="text" id="2fa-secret" class="input-box" placeholder="Paste 2FA Secret Here"><button class="paste-icon-btn" onclick="pasteText('2fa-secret')"><i class="fas fa-paste"></i></button></div>
                 <button class="btn-main" style="background:var(--warning); color:#000; box-shadow:0 5px 15px rgba(245,158,11,0.3);" onclick="generateOTP()"><i class="fas fa-key"></i> Get 2FA OTP</button>
-                <div id="otp-result-box" class="data-box" style="display:none; justify-content:center; align-items:center; gap:15px; background:var(--primary-gradient); color:white; margin-top:15px; padding:20px; border:none; box-shadow:0 10px 25px rgba(79,70,229,0.4);">
+                <div id="otp-result-box" class="data-box" style="display:none; justify-content:center; align-items:center; gap:15px; background:var(--primary-gradient); color:white; margin-top:15px; padding:20px; border:none; box-shadow:0 10px 25px rgba(99,102,241,0.4);">
                     <span id="generated-otp" style="font-size:2.2rem; font-weight:800; letter-spacing:8px;" onclick="copyData(this.parentElement, 'generated-otp')"></span>
                     <button id="refresh-otp-btn" style="display:none; background:rgba(0,0,0,0.3); border:none; color:white; border-radius:50%; width:40px; height:40px; font-size:1.2rem; cursor:pointer;" onclick="generateOTP(true)"><i class="fas fa-sync-alt"></i></button>
                 </div>
@@ -228,7 +277,7 @@
                 <div class="input-with-icon"><input type="text" id="uid-input" class="input-box" placeholder="Paste Facebook UID Here" oninput="validateUid()"><button class="paste-icon-btn" onclick="pasteText('uid-input')"><i class="fas fa-paste"></i></button></div>
             </div>
             
-            <button id="submit-task-btn" class="btn-main" onclick="submitTaskReal(this)" style="display:none; background:var(--blue); margin-top:25px; padding:18px; font-size:1.2rem; box-shadow:0 10px 25px rgba(59, 130, 246, 0.4);"><i class="fas fa-paper-plane"></i> Submit Task</button>
+            <button id="submit-task-btn" class="btn-main" onclick="submitTaskReal(this)" style="display:none; background:var(--blue); margin-top:25px; padding:18px; font-size:1.2rem; box-shadow:0 10px 30px rgba(59, 130, 246, 0.4);"><i class="fas fa-paper-plane"></i> Submit Task</button>
         </div>
     </div>
 
@@ -261,6 +310,11 @@
     </div>
 
     <script type="module">
+        // --- THIS MUST BE AT THE ABSOLUTE TOP OF SCRIPT ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, updateProfile, deleteUser, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, updateDoc, onSnapshot, collection, addDoc, deleteDoc, getDocs, query, where, orderBy, limit, serverTimestamp, increment, writeBatch } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
+
         // Referral link parser - run immediately
         const urlParams = new URLSearchParams(window.location.search);
         const refParam = urlParams.get('ref');
@@ -268,20 +322,16 @@
             localStorage.setItem('referrerId', refParam);
         }
 
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, updateProfile, deleteUser, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, updateDoc, onSnapshot, collection, addDoc, deleteDoc, getDocs, query, where, orderBy, limit, serverTimestamp, increment, writeBatch } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
-
         // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyB20Ll7u4q3-MaKoQ8UaMxyFPDlNDiqWX0",
-  authDomain: "tap-task-pro.firebaseapp.com",
-  projectId: "tap-task-pro",
-  storageBucket: "tap-task-pro.firebasestorage.app",
-  messagingSenderId: "367285156612",
-  appId: "1:367285156612:web:e9f8ba7ec64e9ed7e8ae51",
-  measurementId: "G-FWX4P0VWHS"
-};
+        const firebaseConfig = {
+          apiKey: "AIzaSyB20Ll7u4q3-MaKoQ8UaMxyFPDlNDiqWX0",
+          authDomain: "tap-task-pro.firebaseapp.com",
+          projectId: "tap-task-pro",
+          storageBucket: "tap-task-pro.firebasestorage.app",
+          messagingSenderId: "367285156612",
+          appId: "1:367285156612:web:e9f8ba7ec64e9ed7e8ae51",
+          measurementId: "G-FWX4P0VWHS"
+        };
         const app = initializeApp(firebaseConfig); const auth = getAuth(app); const db = getFirestore(app); const provider = new GoogleAuthProvider();
 
         let currentUser = null; let globalTaskConfig = {}; let currentActiveTasks = []; let sheetConfigs = {}; let generatedTaskId = ""; let userDocData = {}; let activeTaskObj = null; let liveSubmissions = [];
@@ -294,7 +344,7 @@ const firebaseConfig = {
 
         async function withLoading(btnEl, asyncFn) { if(!btnEl || btnEl.disabled) return; let originalText = btnEl.innerHTML; btnEl.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Wait...`; btnEl.disabled = true; try { await asyncFn(); } catch(e) { console.error(e); } finally { btnEl.innerHTML = originalText; btnEl.disabled = false; } }
         window.addEventListener('popstate', (e) => { document.querySelectorAll('.custom-modal').forEach(m => m.classList.remove('active')); let targetPage = (currentUser && adminEmails.includes(currentUser.email)) ? 'admin-home' : 'home-page'; if (e.state && e.state.page) targetPage = e.state.page; let pEl = document.getElementById(targetPage); if (pEl && pEl.classList.contains('page')) { document.querySelectorAll('.page').forEach(p => p.classList.remove('active')); pEl.classList.add('active'); document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active')); let navLink = document.querySelector(`.nav-item[onclick*="${targetPage}"]`); if(navLink) navLink.classList.add('active'); } });
-        window.addEventListener('load', () => { setTimeout(() => { document.getElementById('splash-screen').style.opacity = '0'; setTimeout(() => document.getElementById('splash-screen').style.display = 'none', 500); }, 2000); });
+        window.addEventListener('load', () => { setTimeout(() => { document.getElementById('splash-screen').style.opacity = '0'; setTimeout(() => document.getElementById('splash-screen').style.display = 'none', 600); }, 2200); });
         window.showToast = (msg, type = 'info') => { const container = document.getElementById('toast-container'); const toast = document.createElement('div'); toast.className = `toast ${type}`; let icon = type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-triangle' : 'fa-info-circle'; toast.innerHTML = `<i class="fas ${icon}"></i> <span>${msg}</span>`; container.appendChild(toast); setTimeout(() => { toast.style.animation = 'fadeOut 0.4s forwards'; setTimeout(()=>toast.remove(),400); }, 3000); };
 
         window.toggleAuth = (isReg) => { document.getElementById('auth-slider').style.transform = isReg ? 'translateX(-50%)' : 'translateX(0)'; };
@@ -445,8 +495,20 @@ const firebaseConfig = {
             await withLoading(btn, async () => { 
                 await addDoc(collection(db, "submissions"), { taskId: generatedTaskId, activeTaskId: activeTaskObj.id, taskName: activeTaskObj.name, taskType: activeTaskObj.type, username: uName, firstName: fName, lastName: lName, fullName: fullName, generatedEmail: genMail, password: pass, secret2fa: secret, cookie: cookie, facebookUid: fbUid, recoveryMail: recMail, submittedBy: currentUser.email, uid: currentUser.uid, price: activeTaskObj.price, status: "pending", archived: false, time: new Date().toISOString() }); 
                 await updateDoc(doc(db, "users", currentUser.uid), { pending: increment(1) }); 
-                showToast("Task Submitted Successfully!", "success"); 
                 
+                // PREMIUM SUBMIT SUCCESS ANIMATION TRIGGER
+                let overlay = document.getElementById('submit-success-overlay');
+                overlay.style.display = 'flex';
+                setTimeout(() => overlay.classList.add('show'), 10);
+                
+                setTimeout(() => {
+                    overlay.classList.remove('show');
+                    setTimeout(() => {
+                        overlay.style.display = 'none';
+                        showToast("Task Submitted Successfully!", "success");
+                    }, 350);
+                }, 1600); // Overlay stays for 1.6 seconds
+
                 // Auto refresh new data inside the modal to prevent multiple same task submissions and allow continuous work
                 generatedTaskId = "WP-" + Date.now().toString().slice(-5) + Math.floor(100 + Math.random() * 900);
                 document.getElementById('current-task-id').innerText = "Task ID: " + generatedTaskId;
@@ -502,9 +564,10 @@ const firebaseConfig = {
         window.formatReportData = (docData, taskId, taskName) => { let cols = sheetConfigs[taskId]?.cols || ["Username", "Password", "2FA Code", "Task ID"]; let obj = {}; cols.forEach(col => { if(col === 'Username') obj[col] = docData.username || ''; else if(col === 'Password') obj[col] = docData.password || ''; else if(col === '2FA Code') obj[col] = docData.secret2fa || ''; else if(col === 'Cookies') obj[col] = docData.cookie || ''; else if(col === 'UID') obj[col] = docData.facebookUid || ''; else if(col === 'First Name') obj[col] = docData.firstName || ''; else if(col === 'Last Name') obj[col] = docData.lastName || ''; else if(col === 'Full Name') obj[col] = docData.fullName || ''; else if(col === 'Recovery Email') obj[col] = docData.recoveryMail || ''; else if(col === 'Generated Email') obj[col] = docData.generatedEmail || ''; else if(col === 'Task ID') obj[col] = docData.taskId || ''; else obj[col] = docData[col] || ''; }); return obj; };
         window.renderLiveSheets = () => { let container = document.getElementById('live-sheets-container'); let html = ''; let groups = {}; liveSubmissions.forEach(sub => { let sheetKey = sub.activeTaskId; if(!groups[sheetKey]) groups[sheetKey] = { id: sheetKey, name: sub.taskName || 'Unknown Task', data: [] }; groups[sheetKey].data.push(formatReportData(sub, sub.activeTaskId, sub.taskName)); }); if(Object.keys(groups).length === 0) { container.innerHTML = '<p style="text-align:center; color:var(--muted);">No active pending tasks to display.</p>'; return; } for(let [tId, group] of Object.entries(groups)) { html += `<div class="section-box" style="display:flex; justify-content:space-between; align-items:center; cursor:pointer; border-left: 4px solid var(--primary);" onclick="openSingleLiveSheet('${tId}')"><div style="display:flex; align-items:center; gap:15px;"><i class="fas fa-file-excel" style="font-size:2rem; color:var(--success);"></i><div><b style="font-size:1.1rem; color:var(--primary);">${group.name}</b><p style="font-size:0.85rem; color:var(--muted); font-weight:600;">${group.data.length} Submissions</p></div></div><i class="fas fa-chevron-right" style="color:var(--muted);"></i></div>`; } container.innerHTML = html; window.currentLiveGroups = groups; };
         window.openSingleLiveSheet = (tId) => { let group = window.currentLiveGroups[tId]; if(!group) return; document.getElementById('live-sheet-title').innerText = group.name; let html = `<div class="live-table-wrapper"><table class="live-table"><thead><tr>`; let cols = sheetConfigs[tId]?.cols || ["Username", "Password", "2FA Code", "Task ID"]; cols.forEach(col => { html += `<th>${col}</th>`; }); html += `</tr></thead><tbody>`; group.data.forEach(row => { html += `<tr>`; cols.forEach(col => html += `<td>${row[col]||'-'}</td>`); html += `</tr>`; }); html += `</tbody></table></div>`; document.getElementById('single-sheet-container').innerHTML = html; document.getElementById('dl-single-sheet-btn').onclick = () => downloadSingleSheet(tId, group.name); openSubPage('admin-live-sheet-view'); };
-        window.downloadSingleSheet = (tId, name) => { let group = window.currentLiveGroups[tId]; if(!group || group.data.length === 0) return; let cols = sheetConfigs[tId]?.cols || ["Username", "Password", "2FA Code", "Task ID"]; const ws = XLSX.utils.json_to_sheet(group.data, { header: cols }); const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "Data"); XLSX.writeFile(wb, `taskearn_${name.replace(/\s+/g, '_')}_Live.xlsx`); showToast("Downloaded!", "success"); };
         
-        // Reset Today Fixed (Stores Column Maps in DB)
+        // TaptaskPro renamed in sheet
+        window.downloadSingleSheet = (tId, name) => { let group = window.currentLiveGroups[tId]; if(!group || group.data.length === 0) return; let cols = sheetConfigs[tId]?.cols || ["Username", "Password", "2FA Code", "Task ID"]; const ws = XLSX.utils.json_to_sheet(group.data, { header: cols }); const wb = XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, ws, "Data"); XLSX.writeFile(wb, `TaptaskPro_${name.replace(/\s+/g, '_')}_Live.xlsx`); showToast("Downloaded!", "success"); };
+        
         window.resetToday = async (btn) => { 
             if(!confirm("Are you sure? This will save all active files to history and shift Pending to Processing. Also resets Leaderboard.")) return; 
             await withLoading(btn, async () => { 
@@ -529,7 +592,7 @@ const firebaseConfig = {
             }); 
         };
         
-        // Download Archived Sheet Fixed (Uses Saved Column Maps)
+        // TaptaskPro renamed in sheet
         window.downloadArchivedSheet = async (docId, sheetName) => { 
             const snap = await getDoc(doc(db, "reports", docId)); 
             if(!snap.exists()) return showToast("File not found!", "error"); 
@@ -539,7 +602,7 @@ const firebaseConfig = {
             let cols = (rData.sheetCols && rData.sheetCols[sheetName]) ? rData.sheetCols[sheetName] : Object.keys(tasks[0]);
             const ws = XLSX.utils.json_to_sheet(tasks, { header: cols }); 
             XLSX.utils.book_append_sheet(wb, ws, "Data"); 
-            XLSX.writeFile(wb, 'taptask_${sheetName.replace(/[^a-zA-Z0-9]/g, '_')}_${rData.date.split(',')[0].replace(/\//g,'-')}.xlsx`); 
+            XLSX.writeFile(wb, `TaptaskPro_${sheetName.replace(/[^a-zA-Z0-9]/g, '_')}_${rData.date.split(',')[0].replace(/\//g,'-')}.xlsx`); 
             showToast("File Downloaded!", "success"); 
         };
         
