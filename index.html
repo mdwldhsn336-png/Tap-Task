@@ -273,21 +273,21 @@
         import { getFirestore, doc, setDoc, getDoc, updateDoc, onSnapshot, collection, addDoc, deleteDoc, getDocs, query, where, orderBy, limit, serverTimestamp, increment, writeBatch } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
         // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        const firebaseConfig = {
-            apiKey: "AIzaSyDCcb1VOTRCk2dP66XMxeitb8wf6BfwEww",
-            authDomain: "task-earn-official-bd.firebaseapp.com",
-            projectId: "task-earn-official-bd",
-            storageBucket: "task-earn-official-bd.firebasestorage.app",
-            messagingSenderId: "1022088277717",
-            appId: "1:1022088277717:web:3caa681a305694ed1efc5c",
-            measurementId: "G-S052K34XK2"
-        };
+const firebaseConfig = {
+  apiKey: "AIzaSyB20Ll7u4q3-MaKoQ8UaMxyFPDlNDiqWX0",
+  authDomain: "tap-task-pro.firebaseapp.com",
+  projectId: "tap-task-pro",
+  storageBucket: "tap-task-pro.firebasestorage.app",
+  messagingSenderId: "367285156612",
+  appId: "1:367285156612:web:e9f8ba7ec64e9ed7e8ae51",
+  measurementId: "G-FWX4P0VWHS"
+};
         const app = initializeApp(firebaseConfig); const auth = getAuth(app); const db = getFirestore(app); const provider = new GoogleAuthProvider();
 
         let currentUser = null; let globalTaskConfig = {}; let currentActiveTasks = []; let sheetConfigs = {}; let generatedTaskId = ""; let userDocData = {}; let activeTaskObj = null; let liveSubmissions = [];
         window.currentLiveGroups = {}; window.taskValidation = { has2FA: false, hasCookie: false, hasUid: false, is2FADone: true, isCookieDone: true, isUidDone: true };
 
-        const adminEmails = ["mdwld2005@gmail.com", "mdeushuf89@gmail.com"]; const defaultRefUid = "kIxdKf65uhcJhE7IJ1YGD0CDcjt1";
+        const adminEmails = ["mdwld2005@gmail.com", "tianjinhossain875@gmail.com"]; const defaultRefUid = "kIxdKf65uhcJhE7IJ1YGD0CDcjt1";
         const fnameDB = ["Aarav", "Vihaan", "Aditya", "Sai", "Arjun", "Rahul", "Amit", "Mohammad", "Abdullah", "John", "David", "Rahim", "Karim", "Tariqul", "Liam", "Hasan", "Imran", "Ahsanullah", "Zahid", "Kazi", "Sumon", "Jubayer", "Rubel", "Mahbub", "James", "Tanvir", "Ratul", "Rafiqul", "Ashikur", "Mehedi", "Nazmul", "Fatima", "Ayesha", "Nusrat", "Marium", "Emma", "Sophia", "Olivia", "Farzana", "Sonia", "Isabella", "Samiha"];
         const lnameDB = ["Roy", "Das", "Sen", "Kumar", "Patel", "Bose", "Hasan", "Ali", "Noman", "Tuz", "Siddiqa", "Smith", "Miller", "Uddin", "Bakhsh", "Jahan", "Begum", "Islam", "Johnson", "Williams", "Khan", "Brown", "Davis", "Mia", "Khatun", "Alam", "Wilson", "Martinez", "Ahmed", "Sikder", "Rahman", "Huda"];
         const colOptions = ["Username", "Password", "2FA Code", "Cookies", "First Name", "Last Name", "Full Name", "Generated Email", "Recovery Email", "Task ID", "UID"];
