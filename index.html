@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TASK EARN OFFICIAL BD</title>
+    <title>TAP TASK PRO</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/otpauth/dist/otpauth.umd.min.js"></script>
@@ -118,7 +118,7 @@
         <div class="splash-logo-box">
             <div class="splash-ring"></div>
             <div class="splash-ring-inner"></div>
-            <div class="splash-logo">TASK EARN</div>
+            <div class="splash-logo">TAP TASK PRO</div>
         </div>
         <p style="font-weight:600; letter-spacing:2px; opacity:0.8;">YOUR SMART CAREER</p>
     </div>
@@ -129,7 +129,7 @@
         <div class="login-wrapper">
             <div class="auth-header">
                 <img src="https://cdn-icons-png.flaticon.com/512/295/295128.png" alt="Logo">
-                <h1 style="color:white; font-size:2.2rem; font-weight:800; margin-bottom:5px;">Task Earn Official BD</h1>
+                <h1 style="color:white; font-size:2.2rem; font-weight:800; margin-bottom:5px;">TAP TASK PRO</h1>
                 <p style="color:#cbd5e1; font-size:1rem;">আপনার স্মার্ট ক্যারিয়ার শুরু করুন</p>
             </div>
             <div class="auth-slider-container" id="auth-slider">
@@ -153,7 +153,7 @@
     </div>
 
     <div id="user-app" style="display: none;">
-        <header class="header"><h2>TASK EARN OFFICIAL BD</h2><button onclick="document.body.classList.toggle('light-mode')" style="background:none; border:none; color:var(--text); font-size:1.4rem; cursor:pointer;"><i class="fas fa-moon"></i></button></header>
+        <header class="header"><h2>TAP TASK PRO</h2><button onclick="document.body.classList.toggle('light-mode')" style="background:none; border:none; color:var(--text); font-size:1.4rem; cursor:pointer;"><i class="fas fa-moon"></i></button></header>
         <div id="home-page" class="page active">
             <div class="container">
                 <div class="welcome-card"><h3>স্বাগতম, <span id="u-name">User</span>!</h3><p style="font-size: 0.95rem; opacity: 0.9; margin-top:5px;">আপনার রিয়েলটাইম স্ট্যাটাস</p></div>
@@ -539,7 +539,7 @@
             let cols = (rData.sheetCols && rData.sheetCols[sheetName]) ? rData.sheetCols[sheetName] : Object.keys(tasks[0]);
             const ws = XLSX.utils.json_to_sheet(tasks, { header: cols }); 
             XLSX.utils.book_append_sheet(wb, ws, "Data"); 
-            XLSX.writeFile(wb, `taskearn_${sheetName.replace(/[^a-zA-Z0-9]/g, '_')}_${rData.date.split(',')[0].replace(/\//g,'-')}.xlsx`); 
+            XLSX.writeFile(wb, 'taptask_${sheetName.replace(/[^a-zA-Z0-9]/g, '_')}_${rData.date.split(',')[0].replace(/\//g,'-')}.xlsx`); 
             showToast("File Downloaded!", "success"); 
         };
         
